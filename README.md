@@ -1,52 +1,237 @@
-# Kenstack Shadcn Vite Template
+# kenStack - ShadCN UI + Vite Template
 
-This template offers a robust starting point for building React applications using Vite, Shadcn, and TypeScript. It incorporates a combination of powerful libraries and tools for efficient development and design:
+A modern, production-ready React template built with **ShadCN UI**, **Vite**, **TanStack Router**, **TanStack React Query**, **Jotai**, and **Tailwind CSS**. This template provides a solid foundation for building beautiful, accessible, and performant React applications.
 
-## Key Features:
+## Features
 
-- **Vite**: A lightning-fast build tool for Vue and React, delivering a seamless development experience with hot module replacement (HMR) and excellent performance.
-- **React**: A flexible and efficient JavaScript library for building user interfaces.
-- **Shadcn**: A versatile styling system based on CSS variables, enabling seamless integration with Tailwind CSS for rapid styling and customization.
-- **TypeScript**: Brings optional static typing to JavaScript for enhanced code quality, maintainability, and developer productivity.
-- **Tailwind CSS**: A utility-first CSS framework facilitating rapid styling and clean code with pre-defined classes.
-- **Tailwind CSS Animate**: Extends Tailwind CSS with a collection of smooth animations for a dynamic user experience.
-- **Lucide React**: A library of customizable React components providing a solid foundation for building user interfaces with pre-built components.
-- **Radix UI**: A collection of React components designed for accessibility and customization, enabling the creation of inclusive and flexible UI elements.
+- **ShadCN UI** - Beautiful, accessible components built with Radix UI
+- **Vite** - Lightning-fast build tool and dev server
+- **TanStack Router** - Type-safe, file-based routing with powerful navigation
+- **TanStack React Query** - Powerful data synchronization with automatic caching
+- **Jotai** - Primitive and flexible state management with atomic state
+- **Tailwind CSS** - Utility-first CSS framework for rapid UI development
+- **Dark Mode** - Built-in theme provider with system preference support
+- **TypeScript** - Full type safety out of the box
+- **React 19** - Latest React features with React Compiler
+- **File-based Routing** - Automatic route generation from file structure
+- **Lucide Icons** - Beautiful, customizable icon library
 
-## Getting Started:
+## Tech Stack
 
-1. Clone the repository:
-   git clone https://github.com/your-username/kenstack-shadcn-vite.git
+- **React** 19.1.1 - UI library
+- **Vite** 7.1.7 - Build tool and dev server
+- **TanStack Router** 1.134.4 - Type-safe routing
+- **TanStack React Query** 5.90.6 - Data fetching and caching
+- **Jotai** 2.15.1 - State management
+- **ShadCN UI** - Component library
+- **Tailwind CSS** 4.1.16 - Styling
+- **TypeScript** 5.9.3 - Type safety
+- **Lucide React** - Icon library
 
-2. Install dependencies:
-   npm install
+## Getting Started
 
-3. Run the development server:
-   npm run dev
+### Prerequisites
 
-4. Open your browser and access: [http://localhost:5173/](http://localhost:5173/)
+- **Node.js** 18+ or **Bun** (recommended)
+- **npm**, **yarn**, **pnpm**, or **bun**
 
-## Available Scripts:
+### Installation
 
-- `npm run dev`: Starts the development server with hot module replacement.
-- `npm run build`: Builds the application for production.
-- `npm run lint`: Runs ESLint for code linting.
-- `npm run preview`: Starts a preview server for the built application.
+1. **Clone the repository**
 
-## Key Dependencies:
+```bash
+git clone https://github.com/KennethAduan/kenStack-shadcn-vite.git
+cd kenStack-shadcn-vite
+```
 
-- **Vite**: Build tool ([https://vitejs.dev/](https://vitejs.dev/))
-- **React**: UI library ([https://react.dev/](https://react.dev/))
-- **TypeScript**: Typed JavaScript ([https://www.typescriptlang.org/](https://www.typescriptlang.org/))
-- **Tailwind CSS**: Utility-first CSS framework ([https://tailwindcss.com/](https://tailwindcss.com/))
-- **Shadcn**: CSS Variable Styling System ([https://ui.shadcn.com/docs/installation/manual](https://ui.shadcn.com/docs/installation/manual))
-- **Radix UI**: Component library ([https://www.radix-ui.com/](https://www.radix-ui.com/))
-- **Lucide React**: Component library ([https://lucide.dev/guide/packages/lucide-react](https://lucide.dev/guide/packages/lucide-react))
+2. **Install dependencies**
 
-## Contributing:
+Using npm:
 
-Your contributions are welcome! Feel free to open issues and pull requests for any enhancements or bug fixes.
+```bash
+npm install
+```
 
-## License:
+Using bun:
 
-This template is licensed under the MIT License.
+```bash
+bun install
+```
+
+3. **Start the development server**
+
+Using npm:
+
+```bash
+npm run dev
+```
+
+Using bun:
+
+```bash
+bun run dev
+```
+
+4. **Open your browser**
+
+Navigate to `http://localhost:5173` (or the port shown in your terminal)
+
+## Project Structure
+
+```
+kenStack-shadcn-vite/
+├── src/
+│   ├── atoms/              # Jotai state atoms
+│   │   └── index.ts
+│   ├── components/         # React components
+│   │   ├── ui/            # ShadCN UI components
+│   │   └── mode-toogle.tsx
+│   ├── lib/               # Utility functions
+│   │   └── utils.ts
+│   ├── providers/         # React context providers
+│   │   ├── index.tsx
+│   │   ├── ReactQuery.provider.tsx
+│   │   └── theme-provider.tsx
+│   ├── routes/            # TanStack Router file-based routes
+│   │   ├── __root.tsx    # Root layout
+│   │   └── index.tsx     # Home page
+│   ├── index.css         # Global styles
+│   └── main.tsx          # Application entry point
+├── public/               # Static assets
+├── package.json
+├── vite.config.ts        # Vite configuration
+└── tsconfig.json         # TypeScript configuration
+```
+
+## Usage Examples
+
+### Using Jotai for State Management
+
+```typescript
+import { useAtom } from "jotai";
+import { countAtom } from "@/atoms";
+
+function Counter() {
+  const [count, setCount] = useAtom(countAtom);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+
+### Using TanStack React Query
+
+```typescript
+import { useQuery } from "@tanstack/react-query";
+
+function UserProfile() {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      const response = await fetch("/api/user");
+      return response.json();
+    },
+  });
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  return <div>{data.name}</div>;
+}
+```
+
+### Creating a New Route
+
+Create a new file in `src/routes/`:
+
+```typescript
+// src/routes/about.tsx
+import { createFileRoute } from "@tanstack/react-router";
+
+export const Route = createFileRoute("/about")({
+  component: About,
+});
+
+function About() {
+  return <div>About Page</div>;
+}
+```
+
+The route will be automatically available at `/about`.
+
+### Using ShadCN UI Components
+
+```typescript
+import { Button } from "@/components/ui/button";
+
+function MyComponent() {
+  return (
+    <Button variant="outline" size="lg">
+      Click me
+    </Button>
+  );
+}
+```
+
+### Adding More ShadCN Components
+
+1. Visit [ShadCN UI](https://ui.shadcn.com)
+2. Run the component installation command
+3. Components will be added to `src/components/ui/`
+
+## Theming
+
+The template includes a built-in theme provider with dark mode support. The theme automatically syncs with system preferences.
+
+```typescript
+import { useTheme } from "@/providers/theme-provider";
+
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+      Toggle theme
+    </button>
+  );
+}
+```
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build locally
+- `npm run lint` - Run ESLint
+
+## Useful Links
+
+- [ShadCN UI Documentation](https://ui.shadcn.com)
+- [Vite Documentation](https://vite.dev)
+- [TanStack Router Documentation](https://tanstack.com/router)
+- [TanStack Query Documentation](https://tanstack.com/query)
+- [Jotai Documentation](https://jotai.org)
+- [Tailwind CSS Documentation](https://tailwindcss.com)
+
+## License
+
+This template is open source and available under the [MIT License](LICENSE).
+
+## Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/KennethAduan/kenStack-shadcn-vite/issues).
+
+## Acknowledgments
+
+- [ShadCN](https://twitter.com/shadcn) for the amazing component library
+- [Vite Team](https://github.com/vitejs) for the incredible build tool
+- [TanStack](https://tanstack.com) for the excellent React tools
+- [Jotai](https://jotai.org) for the simple state management solution
+
+---
+
+Made with love by [Kenneth Aduan](https://github.com/KennethAduan)
